@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "7706d150-81c4-4acf-a6ae-17eac125d457",
+		"name": "HTTPBIN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40253563",
+		"_collection_link": "https://solar-rocket-247283.postman.co/workspace/RestAPITesting~78c7a90a-02d3-4535-bd76-63edf861a534/collection/40253563-7706d150-81c4-4acf-a6ae-17eac125d457?action=share&source=collection_link&creator=40253563"
+	},
+	"item": [
+		{
+			"name": "HTTP bin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HTTP binParam",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/get?param1=Anush&param2=POSTMAN",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "param1",
+							"value": "Anush"
+						},
+						{
+							"key": "param2",
+							"value": "POSTMAN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HTTP bin uuid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"json = pm.response.json();\r",
+							"pm.globals.set(\"uuid\",json.uuid);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/uuid",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"uuid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"Body contains name Anush\", function(){\r",
+							"    pm.expect(pm.response.text()).to.include(\"Anush\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"name\" : \"Anush\",\r\n    \"age\" : \"28\",\r\n    \"id\" : {{uuid}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://httpbin.org/post?location=uk&postal=london&id={{uuid}}",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "uk"
+						},
+						{
+							"key": "postal",
+							"value": "london"
+						},
+						{
+							"key": "id",
+							"value": "{{uuid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Request Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"Body contains name Anush\", function(){\r",
+							"    pm.expect(pm.response.text()).to.include(\"Anush\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"name\" : \"Anush\",\r\n    \"age\" : \"28\",\r\n    \"id\" : {{uuid}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://httpbin.org/post?location=uk&postal=london&id={{uuid}}",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "uk"
+						},
+						{
+							"key": "postal",
+							"value": "london"
+						},
+						{
+							"key": "id",
+							"value": "{{uuid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
