@@ -1,1 +1,10 @@
 
+
+GET:
+======
+
+1.Execute POST get its id  , provide key and token
+2.Validate Desc: Created for API Testing in POST
+                 Statuscode
+                 Text
+                 Child condtent in response
