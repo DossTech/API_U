@@ -1,1 +1,26 @@
+HTTP methods:
+-------------
+-used to perform operations with REST API
+
+-make CURD operations possible with REST API
+
+-HTTP GET:  to retrieve resource representation/information only - not to modify it in any way
+   200
+   404
+   Body is optional
+
+-HTTP POST: used to create new resource into the collectionm of resources
+
+   If resource created response: 201
+   IF not 205
+
+-HTTP PUT: used o update the existing resource
+  POST Request are made on resouse collections
+  Put Request are made on single resource
+
+-HTTP Delete:  used to delte resources
+      body is optional
+
+
+
 
