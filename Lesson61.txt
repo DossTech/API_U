@@ -1,0 +1,4 @@
+Communication: SW with SW - API
+
+API: Set of programming code that enable data transmission between one sw pd and another
+this contains the erm of the data exchange
