@@ -1,0 +1,20 @@
+HTTP Request: packet of info sended from one com to another
+              contains:Request Line
+                       Header/s
+                      Request Body
+
+Request Line: Specifies method Tokens(GET,PUT....) FOLLOWED BY REQUEST uri and then
+               HTTP protocol   https://jsonplaceholder.typicode.com/todos/8
+
+Headers: has additional info abt request to server
+
+Request Body: part of HTTP -  additonal infor to the sever
+
+
+HTTP REsponse: packet of information send by server to the client in the response to earlier 
+                Request made by the client
+               It contains the information requested by the client
+               It also contains HEader and body
+
+
+                          
