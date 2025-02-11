@@ -1,0 +1,6 @@
+Client: who want infor
+Server: Provider, who process and provides the information
+Medium: HTTP protocol-medium for communication-xml or json format
+
+
+
