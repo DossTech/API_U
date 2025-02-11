@@ -1,1 +1,32 @@
+Manage TEst Script by like this:
+====================================
+advantages:
+1.One time declaration
+2.Less amount of memory required
+3.Faster execution
+4.Used for multiple assertions
 
+pm.test("Status code is 200", function(){
+    pm.response.to.have.status(200);
+});
+
+const json = pm.response.json();                <===============================observe
+
+//Boardname Postman1
+pm.test("Board name validation", function(){
+    pm.expect(pm.response.text()).to.include("Postman1");
+});
+
+//validate the desc
+pm.test("Presence of Description", function(){
+//json = pm.response.json();
+pm.expect(json.desc).to.eql("Created for API Testing");
+});
+
+//Validating the cardAging is regular
+pm.test("Validating the card aging of the board",function(){
+   // json = pm.response.json();
+    pm.expect(json.prefs.cardAging).to.eql("regular");
+});
+
+console.log(json);
