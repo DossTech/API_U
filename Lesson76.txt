@@ -14,3 +14,27 @@ Postman supports variables at different scopes
 -----------------------
         local
 -----------------------
+
+-> used to store and reuse values in your response and scripts
+-> postman supports variables at different scopes
+
+Global:
+--------
+  -accessable between collectins, requests, tstscripts and environments.
+  -global variables are available throughtout a workplace
+
+Collection:
+-----------
+ -available throughout the requests in collection and are independet of environmen
+ - don't change neviornment
+
+Environment:
+------------
+ -allows to tailor your process to different environemnts
+ -eg local or deve or testing
+ - onlyone active ata a time
+
+
+
+
+
