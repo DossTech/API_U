@@ -10,3 +10,17 @@ Resource: the information returned by the server is resource
 Elements:
  1.REsource: infor stored in server can be requested by client
  2.REq. identifier: we need to uniquely identify the resource i.e the complete URL
+ 3.Representation: A resource is the actual data. Now this data can be represented 
+   as xml, HTML or may be simple text
+ 4.Representation Metadata: In order for the clients to specify and process a resources given in a particular rep(xml or HTML ..etc) some extra data (Metadata) needs to be passed in the request.
+
+
+Composition of URI:
+-------------------
+   URI = scheme - HTTPs protocol
+        :// - main domain
+        / path  - hierarchy
+       ? - query parameter
+        # - parameter
+
+
