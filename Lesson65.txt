@@ -1,3 +1,12 @@
 65/180
 
-TEST API uses URI
+TEST API uses URIs  to address resources
+
+URL: URI(Uniform Resource Identifier)+resource
+    //toaddress the resource
+
+Resource: the information returned by the server is resource
+
+Elements:
+ 1.REsource: infor stored in server can be requested by client
+ 2.REq. identifier: we need to uniquely identify the resource i.e the complete URL
