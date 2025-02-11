@@ -1,1 +1,8 @@
-1
+Why POSTMAN
+===========
+Differnt TC and TD
+
+
+1.Download the postman as sw..app
+2.Create an account or not    (a/c will hold the data)
+3.Create workspace
