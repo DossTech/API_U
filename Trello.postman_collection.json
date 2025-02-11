@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "e7260dc8-69a9-4ee5-b32d-0e32b3705f67",
+		"name": "Trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40253563",
+		"_collection_link": "https://solar-rocket-247283.postman.co/workspace/HTTP~00c8eefd-3b5b-436f-91f2-00ed4df387d3/collection/40253563-e7260dc8-69a9-4ee5-b32d-0e32b3705f67?action=share&source=collection_link&creator=40253563"
+	},
+	"item": [
+		{
+			"name": "BoardCreation",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{base_uri}}/1/boards?name=Postman1&key={{trelloauthkey}}&token={{trelloauthtoken}}",
+					"protocol": "https",
+					"host": [
+						"{{base_uri}}"
+					],
+					"path": [
+						"1",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Postman1"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloauthkey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloauthtoken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const json = pm.response.json();\r",
+							"\r",
+							"//Boardname Postman1\r",
+							"pm.test(\"Board name validation\", function(){\r",
+							"    pm.expect(pm.response.text()).to.include(\"Postman1\");\r",
+							"});\r",
+							"\r",
+							"//validate the desc\r",
+							"pm.test(\"Presence of Description\", function(){\r",
+							"//json = pm.response.json();\r",
+							"pm.expect(json.desc).to.eql(\"Created for API Testing\");\r",
+							"});\r",
+							"\r",
+							"//Validating the cardAging is regular\r",
+							"pm.test(\"Validating the card aging of the board\",function(){\r",
+							"   // json = pm.response.json();\r",
+							"    pm.expect(json.prefs.cardAging).to.eql(\"regular\");\r",
+							"});\r",
+							"\r",
+							"console.log(json);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{base_uri}}/1/boards/ZEAuTRO6?key={{trelloauthkey}}&token={{trelloauthtoken}}&id=ZEAuTRO6",
+					"protocol": "https",
+					"host": [
+						"{{base_uri}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"ZEAuTRO6"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{trelloauthkey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloauthtoken}}"
+						},
+						{
+							"key": "id",
+							"value": "ZEAuTRO6"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
