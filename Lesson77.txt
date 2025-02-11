@@ -1,1 +1,5 @@
-
+Usage of Global variable 
+=========================
+1.Declare it  to the right of the "environment"
+2.Assign the values
+3.Declare in params - key with {{name}}
