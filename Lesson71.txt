@@ -1,1 +1,7 @@
+Cookies Handling:
+=================
+1. APPLY : https://httpbin.org/cookies/set
+2. In params: we apply cookies: key with value -  it is stored in postman after we save - next time when we request without these params
+       server automatically recognise and send these cookies
+3. Customised cookies can be created - cookies management
 
