@@ -1,1 +1,14 @@
+https://httpbin.org/
+
+Account iun Trello
+Trello: An online listing and webboard portal
+Trello is subsidary of Atlassian
+
+Acc Setup---->ManualHandling----API DOC
+APIKey-->ToenGnenration---->ExecuteTEst
+
+
+1.Go to Tello- set an account
+2.Visible for TEam
+3.Create a board - if needed set Theme
 
