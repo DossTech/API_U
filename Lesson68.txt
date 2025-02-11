@@ -1,1 +1,11 @@
+So far from 68 and 69
+1.An uuid is added in the params of "GET" - -----> it was randomly generating
 
+2.We set it as Global variable by this code in GET
+   
+json = pm.response.json();
+pm.globals.set("uuid",json.uuid);
+
+3.Now passing that global variable key in "POST" in
+params of POST as id = {{uuid}}  or
+in Body
