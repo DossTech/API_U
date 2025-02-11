@@ -1,4 +1,6 @@
-//Trello GET
+//Trello POST:-
+POST  https://{{base_uri}}/1/boards?name=Postman1&key={{trelloauthkey}}&token={{trelloauthtoken}}
+//Trello GET: https://{{base_uri}}/1/boards/ZEAuTRO6?key={{trelloauthkey}}&token={{trelloauthtoken}}&id=ZEAuTRO6
 
 pm.test("Status code is 200", function(){
     pm.response.to.have.status(200);
