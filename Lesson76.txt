@@ -34,6 +34,15 @@ Environment:
  -eg local or deve or testing
  - onlyone active ata a time
 
+local:
+------
+ -temporary variables - only in the request script
+
+data:
+------
+ -come from external CSV and JSON files 
+ - used to running collection via NEWman or Collection Runner
+
 
 
 
