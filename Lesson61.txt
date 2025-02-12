@@ -558,8 +558,8 @@ public class Trello1 {
 }
 
 --------------------------------------------------------------------
-Lecture:104:
-===========
+Essential imports
+====================
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -568,6 +568,45 @@ import static io.restassured.RestAssured.*;
 
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
+-------------------------------------------------------------------------
+
+Lesson:104
+-----------Validating the REsponse using REst Assured
+
+package basic.rest.getcall;
+
+import io.restassured.RestAssured;
+import io.restassured.RestAssured.*;
+import io.restassured.http.ContentType;
+
+import static  io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+public class Trello1 {
+
+	public static String baseURI = "https://api.trello.com";
+	
+	public static void main(String[] args) {
+		
+		RestAssured.baseURI=baseURI;
+		
+		given().param("key", "********").
+		             param("token", "*******").
+		
+        when().
+                      get("/1/boards/cifNpKPv").
+            
+        then().
+                      assertThat().statusCode(200).and().
+                      contentType(ContentType.JSON).and().
+                      body("name", equalTo("Postman1")).and().
+                      body("desc",equalTo("Created for API Testing"));
+		
+		System.out.println("First Automation call");
+		System.out.println("Get call, Executed Successfully");
+
+	}
+}
+
 
 
 
