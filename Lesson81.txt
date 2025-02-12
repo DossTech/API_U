@@ -1,1 +1,17 @@
+Need for Pre-requsit:
+=====================
 
+1.Setting Board name in POST: Create board===========>prerequisit test
+const boardname = "Automation Sprint"+ parseInt(Math.random)*100;
+pm.environment.set("noard_name",boardname);
+
+2.Now Validating the boardname and unsetting the board name in POST: Create board===>postrequisit test
+
+//Boardname Automation Sprint
+pm.test("Board name validation", function(){
+    pm.expect(json.name).to.eql(pm.environment.get("boardname"));
+});
+
+pm.environment.unset("boardname")
+
+/// for the above we need to delete all the boards only the it will be crated
