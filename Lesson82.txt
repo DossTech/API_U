@@ -1,1 +1,9 @@
+Practise session: Creation of Github account
+<82-*84>
 
+Use: dummy github account
+go to github developer api docu
+fetch git of an account with username
+fetch an account fo an usernmae with "Bearer token"
+
+Place the authentication at collection level.... easy for the forcoming requests- having inheritanc3
