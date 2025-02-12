@@ -1,0 +1,1 @@
+https://github.com/anshulc55/Rest_Assured_Code/blob/master/SampleRestAssured/src/rest/basic/testing/GetRequestSample.java
