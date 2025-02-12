@@ -74,7 +74,7 @@ pm.globals.set("list2_id",json[1].id);
 
 6.Setting in params of create card(in To do) globally {{list2_id}}
 
-7.Asserting the id in POST as
+7.Asserting the id in POST(cretion of card) as
 
 //pm.test("Validating the IdList", function () {
  //   pm.expect(json.idList).to.eql("67ac4858919d55b6a81b759f");
@@ -84,4 +84,8 @@ pm.test("Validating the IdList", function () {
     pm.expect(json.idList).to.eql(pm.globals.get("list2_id"));
 });
 
-
+=============================
+POST:CREATE A BOARD
+GET:get board
+GET:get board list
+POST:create card
