@@ -525,42 +525,36 @@ https://github.com/anshulc55/RestAssured_Automation
 Lesson:103: 
 ------------
 https://github.com/anshulc55/Rest_Assured_Code/blob/master/SampleRestAssured/src/rest/basic/testing/GetRequestSample.java
+https://github.com/anshulc55/Rest_Assured_Code/blob/master/SampleRestAssured/src/rest/basic/testing/GetRequestSample.java
 
 
-Lecturer: 103:
-===============
 creation of project and asserting this
 
 package basic.rest.getcall;
 
-import static io.restassured.RestAssured.*;
 import io.restassured.RestAssured;
 import io.restassured.RestAssured.*;
+import static  io.restassured.RestAssured.*;
+public class Trello1 {
 
-public class GettMethodAutomation {
+	public static String baseURI = "https://api.trello.com";
+	
+	public static void main(String[] args) {
+		
+		RestAssured.baseURI=baseURI;
+		
+		given().param("key", "*******").
+		             param("token", "*******").
+		
+        when().
+                      get("/1/boards/cifNpKPv").
+            
+        then().
+                      assertThat().statusCode(200);
+		
+		System.out.println("Asserted");
 
-	
-	//Base URI
-		public static String baseuri = "https://api.trello.com";
-		
-		
-		public static void main(String args[]) {
-			
-			RestAssured.baseURI = baseuri;
-	
-			given().param("key","*****").
-			             param("token","********");
-	
-			when().get("/1/boards/cifNpKPv").
-			
-		then().
-		assertThat().statusCode(200);
-			
-			
-		//	then().assertThat().statusCode(200);
-			
-			System.out.println("Validation of Trello");
-		}
+	}
 }
 
 --------------------------------------------------------------------
@@ -574,6 +568,9 @@ import static io.restassured.RestAssured.*;
 
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
+
+
+
 
 
 
