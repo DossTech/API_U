@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "742fe09a-d701-4692-ae7a-b147a6add25d",
+		"name": "Trello_1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40253563",
+		"_collection_link": "https://solar-rocket-247283.postman.co/workspace/78c7a90a-02d3-4535-bd76-63edf861a534/collection/40253563-742fe09a-d701-4692-ae7a-b147a6add25d?action=share&source=collection_link&creator=40253563"
+	},
+	"item": [
+		{
+			"name": "BoardCreation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const json = pm.response.json();              \r",
+							"\r",
+							"//Boardname Postman1\r",
+							"//pm.test(\"Board name validation\", function(){\r",
+							" //   pm.expect(pm.response.text()).to.include(\"Postman1\");\r",
+							"//});\r",
+							"\r",
+							"//Boardname Automation Sprint\r",
+							"pm.test(\"Board name validation\", function(){\r",
+							"    pm.expect(json.name).to.eql(pm.environment.get(\"board_name\"));\r",
+							"});\r",
+							"\r",
+							"pm.environment.unset(\"board_name\")\r",
+							"//\r",
+							"//validate the desc\r",
+							"//pm.test(\"Presence of Description\", function(){\r",
+							"//json = pm.response.json();\r",
+							"//pm.expect(json.desc).to.eql(\"Created for API Testing\");\r",
+							"//});\r",
+							"\r",
+							"//Validating the cardAging is regular\r",
+							"//pm.test(\"Validating the card aging of the board\",function(){\r",
+							"   // json = pm.response.json();\r",
+							"  //  pm.expect(json.prefs.cardAging).to.eql(\"regular\");\r",
+							"//});\r",
+							"\r",
+							"console.log(json);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const boardname = \"Automation Sprint\" + parseInt(Math.random) * 100;\r",
+							"pm.environment.set(\"board_name\",boardname);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\"name\" : \"Postman1\",\r\n\"location\" : \"UK\",\r\n\"postal\" : \"London\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{base_uri}}/1/boards?name=Postman1&key={{trelloauthkey}}\n&token={{trelloauthtoken}}",
+					"protocol": "https",
+					"host": [
+						"{{base_uri}}"
+					],
+					"path": [
+						"1",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Postman1"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloauthkey}}\n",
+							"description": "\n"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloauthtoken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const json = pm.response.json();               \r",
+							"\r",
+							"//Boardname Postman1\r",
+							"pm.test(\"Board name validation\", function(){\r",
+							"    pm.expect(pm.response.text()).to.include(\"Postman1\");\r",
+							"});\r",
+							"\r",
+							"//validate the desc\r",
+							"pm.test(\"Presence of Description\", function(){\r",
+							"//json = pm.response.json();\r",
+							"pm.expect(json.desc).to.eql(\"Created for API Testing\");\r",
+							"});\r",
+							"\r",
+							"//Validating the cardAging is regular\r",
+							"pm.test(\"Validating the card aging of the board\",function(){\r",
+							"   // json = pm.response.json();\r",
+							"    pm.expect(json.prefs.cardAging).to.eql(\"regular\");\r",
+							"});\r",
+							"\r",
+							"console.log(json);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{base_uri}}/1/boards/cifNpKPv?key={{trelloauthkey}}&token={{trelloauthtoken}}",
+					"protocol": "https",
+					"host": [
+						"{{base_uri}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"cifNpKPv"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{trelloauthkey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloauthtoken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Board Lists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"const json = pm.response.json();\r",
+							"\r",
+							"//validating the name of first list: List1\r",
+							"pm.test(\"Validating the Name of card1:\");\r",
+							"pm.expect(json[0].name).to.eql(\"To Do\");\r",
+							"\r",
+							"//validating the name of Second list: List2\r",
+							"pm.test(\"Validating the Name of card2:\")\r",
+							"pm.expect(json[1].name).to.eql(\"Doing\");\r",
+							"\r",
+							"//validating the name of Third list: List3\r",
+							"pm.test(\"Validating the Name of card3:\")\r",
+							"pm.expect(json[2].name).to.eql(\"Done\");\r",
+							"\r",
+							"//setting the Second List id global\r",
+							"pm.globals.set(\"list2_id\",json[1].id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.trello.com/1/boards/cifNpKPv/lists?key={{trelloauthkey}}&token={{trelloauthtoken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"cifNpKPv",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{trelloauthkey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloauthtoken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validating the status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const json = pm.response.json();\r",
+							"\r",
+							"//pm.test(\"Validating the IdList\", function () {\r",
+							" //   pm.expect(json.idList).to.eql(\"67ac4858919d55b6a81b759f\");\r",
+							"//});\r",
+							"//instead of above\r",
+							"pm.test(\"Validating the IdList\", function () {\r",
+							"    pm.expect(json.idList).to.eql(pm.globals.get(\"list2_id\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://{{base_uri}}/1/cards?key={{trelloauthkey}}&token={{trelloauthtoken}}&idList={{list2_id}}&name=First API Generated Card",
+					"protocol": "https",
+					"host": [
+						"{{base_uri}}"
+					],
+					"path": [
+						"1",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{trelloauthkey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloauthtoken}}"
+						},
+						{
+							"key": "idList",
+							"value": "{{list2_id}}"
+						},
+						{
+							"key": "name",
+							"value": "First API Generated Card"
+						},
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "9b67c0d225905827104fea7c2641e601",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
