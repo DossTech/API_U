@@ -673,7 +673,7 @@ public class Trello2VerifResponse {
 -------------------------------------------------------------------------------------------------
 
 Lesson:107
------------Automating Post Request
+-----------Automating Post Request without body
 
 package basic.rest.postcall;
 import io.restassured.RestAssured;
@@ -716,7 +716,14 @@ public class PostCallAutomation {
 
 }
 
+------------------------------------------------------------------------------------------------------
 
+Lesson:108
+-----------Body Data in Post Request
+
+//creation of repo ....not creating now using pstman
+
+Creat an rep: name = APIlearing
 
 
 
