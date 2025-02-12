@@ -26,4 +26,62 @@ pm.test("Validating the card aging of the board",function(){
 });
 
 console.log(json);
+////////////////////////////////////////////////////////////////////////////////////////////
+GET LIST ON BOARD:
+===================
+i.e TO DO, DO ....
+
+1."Get lists on Board"   from reference of Trello developer site - apply the Global variables(1,2,3)
+2.Assertion:
+pm.test("Status code is 200", function(){
+    pm.response.to.have.status(200);
+    });
+
+const json = pm.response.json();
+
+//validating the name of first list: List1
+pm.test("Validating the Name of card1:");
+pm.expect(json[0].name).to.eql("To Do");
+
+//validating the name of first list: List2
+pm.test("Validating the Name of card2:")
+pm.expect(json[1].name).to.eql("Doing");
+
+//validating the name of first list: List3
+pm.test("Validating the Name of card3:")
+pm.expect(json[2].name).to.eql("Done");
+
+3.Generation of cards: POST
+   we need to give :  key,token, id of the boards(doing),name
+
+4.Asserting the Id of the Card: To DO -  in POST(create card)
+             status code, List ID
+
+pm.test("Validating the status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+const json = pm.response.json();
+
+pm.test("Validating the IdList", function () {
+    pm.expect(json.idList).to.eql("67ac4858919d55b6a81b759f");
+});
+
+
+5.Setting the List 2(To DO) id as global in "Get List" so accessable in POST- create card
+//setting the Second List id global
+pm.globals.set("list2_id",json[1].id);
+
+6.Setting in params of create card(in To do) globally {{list2_id}}
+
+7.Asserting the id in POST as
+
+//pm.test("Validating the IdList", function () {
+ //   pm.expect(json.idList).to.eql("67ac4858919d55b6a81b759f");
+//});
+//instead of above
+pm.test("Validating the IdList", function () {
+    pm.expect(json.idList).to.eql(pm.globals.get("list2_id"));
+});
+
 
