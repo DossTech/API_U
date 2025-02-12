@@ -2,3 +2,594 @@ Communication: SW with SW - API
 
 API: Set of programming code that enable data transmission between one sw pd and another
 this contains the erm of the data exchange
+
+
+Lesson 62:
+-----------
+Use of API:
+===========        62/180
+
+
+Vender----hit--<API
+
+Lesson 63:
+----------
+Client: who want infor
+Server: Provider, who process and provides the information
+Medium: HTTP protocol-medium for communication-xml or json format
+
+Lesson64:
+----------
+HTTP Request: packet of info sended from one com to another
+              contains:Request Line
+                       Header/s
+                      Request Body
+
+Request Line: Specifies method Tokens(GET,PUT....) FOLLOWED BY REQUEST uri and then
+               HTTP protocol   https://jsonplaceholder.typicode.com/todos/8
+
+Headers: has additional info abt request to server
+
+Request Body: part of HTTP -  additonal infor to the sever
+
+
+HTTP REsponse: packet of information send by server to the client in the response to earlier 
+                Request made by the client
+               It contains the information requested by the client
+               It also contains HEader and body
+
+
+Lesson:65:
+------------
+TEST API uses URIs  to address resources
+
+URL: URI(Uniform Resource Identifier)+resource
+    //toaddress the resource
+
+Resource: the information returned by the server is resource
+
+Elements:
+ 1.REsource: infor stored in server can be requested by client
+ 2.REq. identifier: we need to uniquely identify the resource i.e the complete URL
+ 3.Representation: A resource is the actual data. Now this data can be represented 
+   as xml, HTML or may be simple text
+ 4.Representation Metadata: In order for the clients to specify and process a resources given in a particular rep(xml or HTML ..etc) some extra data (Metadata) needs to be passed in the request.
+
+
+Composition of URI:
+-------------------
+   URI = scheme - HTTPs protocol
+        :// - main domain
+        / path  - hierarchy
+       ? - query parameter
+        # - parameter
+
+----------------------------------------------------------
+
+Lesson:66
+----------
+HTTP methods:
+-------------
+-used to perform operations with REST API
+
+-make CURD operations possible with REST API
+
+-HTTP GET:  to retrieve resource representation/information only - not to modify it in any way
+   200
+   404
+   Body is optional
+
+-HTTP POST: used to create new resource into the collectionm of resources
+
+   If resource created response: 201
+   IF not 205
+
+-HTTP PUT: used o update the existing resource
+  POST Request are made on resouse collections
+  Put Request are made on single resource
+
+-HTTP Delete:  used to delte resources
+      body is optional
+
+------------------------------------------------------------
+Lesson:67
+-----------
+Why POSTMAN
+===========
+Differnt TC and TD
+
+
+1.Download the postman as sw..app
+2.Create an account or not    (a/c will hold the data)
+3.Create workspace
+
+------------------------------------------------------------
+
+Lesson:68
+----------
+So far from 68 and 69
+1.An uuid is added in the params of "GET" - -----> it was randomly generating
+
+2.We set it as Global variable by this code in GET
+   
+json = pm.response.json();
+pm.globals.set("uuid",json.uuid);
+
+3.Now passing that global variable key in "POST" in
+params of POST as id = {{uuid}}  or
+in Body
+
+------------------------------------------------------------
+
+Lesson:71
+-----------
+Cookies Handling:
+=================
+1. APPLY : https://httpbin.org/cookies/set
+2. In params: we apply cookies: key with value -  it is stored in postman after we save - next time when we request without these params
+       server automatically recognise and send these cookies
+3. Customised cookies can be created - cookies management
+
+---------------------------------------------------------------
+
+Lesson:72
+----------
+https://httpbin.org/
+
+Account iun Trello
+Trello: An online listing and webboard portal
+Trello is subsidary of Atlassian
+
+Acc Setup---->ManualHandling----API DOC
+APIKey-->ToenGnenration---->ExecuteTEst
+
+
+1.Go to Tello- set an account
+2.Visible for TEam
+3.Create a board - if needed set Theme
+
+--------------------------------------------------------------
+
+Lesson:73
+----------
+Creation of Board
+===================
+1.using Trello https://trello.com/w/userworkspace11071316  - With username and password
+2.POST - with key and token -  we create a board in the applicationfrom Post --->"WOOOOOW"
+
+------------------------------------------------------------------
+
+Lesson:74:
+---------
+
+GET:
+======
+
+1.Execute POST get its id  , provide key and token
+2.Validate Desc: Created for API Testing in POST
+                 Statuscode
+                 Text
+                 Child condtent in response
+
+pm.test("Status code is 200", function(){
+    pm.response.to.have.status(200);
+});
+
+//Boardname Postman1
+pm.test("Board name validation", function(){
+    pm.expect(pm.response.text()).to.include("Postman1");
+});
+
+//validate the desc
+pm.test("Presence of Description", function(){
+json = pm.response.json();
+pm.expect(json.desc).to.eql("Created for API Testing");
+});
+
+//Validating the cardAging is regular
+pm.test("Validating the card aging of the board",function(){
+    json = pm.response.json();
+    pm.expect(json.prefs.cardAging).to.eql("regular");
+});
+
+----------------------------------------------------------------
+Lesson:75
+---------
+Manage TEst Script by like this:
+====================================
+advantages:
+1.One time declaration
+2.Less amount of memory required
+3.Faster execution
+4.Used for multiple assertions
+
+pm.test("Status code is 200", function(){
+    pm.response.to.have.status(200);
+});
+
+const json = pm.response.json();                <===============================observe
+
+//Boardname Postman1
+pm.test("Board name validation", function(){
+    pm.expect(pm.response.text()).to.include("Postman1");
+});
+
+//validate the desc
+pm.test("Presence of Description", function(){
+//json = pm.response.json();
+pm.expect(json.desc).to.eql("Created for API Testing");
+});
+
+//Validating the cardAging is regular
+pm.test("Validating the card aging of the board",function(){
+   // json = pm.response.json();
+    pm.expect(json.prefs.cardAging).to.eql("regular");
+});
+
+console.log(json);
+-------------------------------------------------------------
+
+Lesson:76
+-----------
+
+Variable: Used to store the data
+
+Used to store and resue values in your requests and scripts
+
+Postman supports variables at different scopes
+
+       global
+ ----------------------
+     collection
+-----------------------
+     environment
+-----------------------
+        data
+-----------------------
+        local
+-----------------------
+
+-> used to store and reuse values in your response and scripts
+-> postman supports variables at different scopes
+
+Global:
+--------
+  -accessable between collectins, requests, tstscripts and environments.
+  -global variables are available throughtout a workplace
+
+Collection:
+-----------
+ -available throughout the requests in collection and are independet of environmen
+ - don't change neviornment
+
+Environment:
+------------
+ -allows to tailor your process to different environemnts
+ -eg local or deve or testing
+ - onlyone active ata a time
+
+local:
+------
+ -temporary variables - only in the request script
+
+data:
+------
+ -come from external CSV and JSON files 
+ - used to running collection via NEWman or Collection Runner
+
+-------------------------------------------------------------------
+
+Lesson:77
+----------
+Usage of Global variable 
+=========================
+1.Declare it  to the right of the "environment"
+2.Assign the values
+3.Declare in params - key with {{name}}
+
+------------------------------------------------------------------
+
+Lesson:78
+------------
+//Trello POST:-
+POST  https://{{base_uri}}/1/boards?name=Postman1&key={{trelloauthkey}}&token={{trelloauthtoken}}
+//Trello GET: https://{{base_uri}}/1/boards/ZEAuTRO6?key={{trelloauthkey}}&token={{trelloauthtoken}}&id=ZEAuTRO6
+
+pm.test("Status code is 200", function(){
+    pm.response.to.have.status(200);
+});
+
+const json = pm.response.json();
+
+//Boardname Postman1
+pm.test("Board name validation", function(){
+    pm.expect(pm.response.text()).to.include("Postman1");
+});
+
+//validate the desc
+pm.test("Presence of Description", function(){
+//json = pm.response.json();
+pm.expect(json.desc).to.eql("Created for API Testing");
+});
+
+//Validating the cardAging is regular
+pm.test("Validating the card aging of the board",function(){
+   // json = pm.response.json();
+    pm.expect(json.prefs.cardAging).to.eql("regular");
+});
+
+console.log(json);
+////////////////////////////////////////////////////////////////////////////////////////////
+GET LIST ON BOARD:
+===================
+i.e TO DO, DO ....
+
+1."Get lists on Board"   from reference of Trello developer site - apply the Global variables(1,2,3)
+2.Assertion:
+pm.test("Status code is 200", function(){
+    pm.response.to.have.status(200);
+    });
+
+const json = pm.response.json();
+
+//validating the name of first list: List1
+pm.test("Validating the Name of card1:");
+pm.expect(json[0].name).to.eql("To Do");
+
+//validating the name of first list: List2
+pm.test("Validating the Name of card2:")
+pm.expect(json[1].name).to.eql("Doing");
+
+//validating the name of first list: List3
+pm.test("Validating the Name of card3:")
+pm.expect(json[2].name).to.eql("Done");
+
+3.Generation of cards: POST
+   we need to give :  key,token, id of the boards(doing),name
+
+4.Asserting the Id of the Card: To DO -  in POST(create card)
+             status code, List ID
+
+pm.test("Validating the status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+const json = pm.response.json();
+
+pm.test("Validating the IdList", function () {
+    pm.expect(json.idList).to.eql("67ac4858919d55b6a81b759f");
+});
+
+
+5.Setting the List 2(To DO) id as global in "Get List" so accessable in POST- create card
+//setting the Second List id global
+pm.globals.set("list2_id",json[1].id);
+
+6.Setting in params of create card(in To do) globally {{list2_id}}
+
+7.Asserting the id in POST(cretion of card) as
+
+//pm.test("Validating the IdList", function () {
+ //   pm.expect(json.idList).to.eql("67ac4858919d55b6a81b759f");
+//});
+//instead of above
+pm.test("Validating the IdList", function () {
+    pm.expect(json.idList).to.eql(pm.globals.get("list2_id"));
+});
+
+=============================
+POST:CREATE A BOARD
+GET:get board
+GET:get board list
+POST:create card
+
+------------------------------------------------------------------
+
+Lesson:79-80
+-----------
+
+ EnvironmentalVariable
+
+https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-cards-post
+
+---------------------------------------------------------------------
+
+Lesson:81
+----------
+Need for Pre-requsit:
+=====================
+
+1.Setting Board name in POST: Create board===========>prerequisit test
+const boardname = "Automation Sprint"+ parseInt(Math.random)*100;
+pm.environment.set("noard_name",boardname);
+
+2.Now Validating the boardname and unsetting the board name in POST: Create board===>postrequisit test
+
+//Boardname Automation Sprint
+pm.test("Board name validation", function(){
+    pm.expect(json.name).to.eql(pm.environment.get("boardname"));
+});
+
+pm.environment.unset("boardname")
+
+/// for the above we need to delete all the boards only the it will be crated
+-----------------------------------------------------------------------
+
+Lesson:82
+-----------
+Practise session: Creation of Github account
+<82-*84>
+
+Use: dummy github account
+go to github developer api docu
+fetch git of an account with username
+fetch an account fo an usernmae with "Bearer token"
+
+Place the authentication at collection level.... easy for the forcoming requests- having inheritanc3
+
+------------------------------------------------------------------------
+
+Lesson:83-100(TestNG)
+----------------------
+https://github.com/anshulc55/JavaTraining/tree/master/MyTestNGProject/src/com/testng
+
+85-100 All about TestNG
+
+-------------------------------------------------------------------------
+
+Lesson:101
+-----------
+
+Rest Assured enabled to test REST APIs using java libraries and integrates well with Maven
+
+Rest Assured, helpful in API Testing and API TEsting Automation Workflow
+
+Requirement of the Setup:
+  1.Java
+  2.Eclipse IDE
+  3.Rest Assured libs
+
+//pom:    (fromhttps://github.com/rest-assured/rest-assured/wiki/GettingStarted)
+-------
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.udemy.com</groupId>
+  <artifactId>RestAPI</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>5.5.0</version>
+      <scope>test</scope>
+</dependency>
+
+<dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>json-path</artifactId>
+      <version>5.5.0</version>
+      <scope>test</scope>
+</dependency>
+
+<dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>xml-path</artifactId>
+      <version>5.5.0</version>
+      <scope>test</scope>
+</dependency>
+
+<dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>json-schema-validator</artifactId>
+      <version>5.5.0</version>
+      <scope>test</scope>
+</dependency>
+
+<dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>spring-mock-mvc</artifactId>
+      <version>5.5.0</version>
+      <scope>test</scope>
+</dependency>
+
+<dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>spring-web-test-client</artifactId>
+      <version>5.5.0</version>
+      <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>scala-support</artifactId>
+    <version>5.5.0</version>
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>kotlin-extensions</artifactId>
+    <version>5.5.0</version>
+    <scope>test</scope>
+</dependency>
+  </dependencies></project>
+
+------------------------------------------------------------
+
+Lesson:102 - Project location
+
+https://github.com/anshulc55/RestAssured_Automation
+
+----------------------------------------------------------
+
+Lesson:103: 
+------------
+https://github.com/anshulc55/Rest_Assured_Code/blob/master/SampleRestAssured/src/rest/basic/testing/GetRequestSample.java
+
+
+Lecturer: 103:
+===============
+creation of project and asserting this
+
+package basic.rest.getcall;
+
+import static io.restassured.RestAssured.*;
+import io.restassured.RestAssured;
+import io.restassured.RestAssured.*;
+
+public class GettMethodAutomation {
+
+	
+	//Base URI
+		public static String baseuri = "https://api.trello.com";
+		
+		
+		public static void main(String args[]) {
+			
+			RestAssured.baseURI = baseuri;
+	
+			given().param("key","*****").
+			             param("token","********");
+	
+			when().get("/1/boards/cifNpKPv").
+			
+		then().
+		assertThat().statusCode(200);
+			
+			
+		//	then().assertThat().statusCode(200);
+			
+			System.out.println("Validation of Trello");
+		}
+}
+
+--------------------------------------------------------------------
+Lecture:104:
+===========
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
+import static io.restassured.RestAssured.*;
+
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
