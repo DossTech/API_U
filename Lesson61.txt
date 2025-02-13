@@ -410,7 +410,7 @@ pm.test("Board name validation", function(){
     pm.expect(json.name).to.eql(pm.environment.get("boardname"));
 });
 
-pm.environment.unset("boardname")
+pm.environment.unset("board_name")
 
 /// for the above we need to delete all the boards only the it will be crated
 -----------------------------------------------------------------------
@@ -723,10 +723,51 @@ Lesson:108
 
 //creation of repo ....not creating now using pstman
 
-Creat an rep: name = APIlearing
+Creat an rep: name = APIlearing1
 
 //using Eclipse we have create a repository
 
+Creat an rep: name = APIlearing2
+
+
+package basic.rest.postcall;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+
+import org.testng.annotations.Test;
+
+public class CreateGithubRepo {
+
+	@Test
+	public void createRepo() {
+
+		RestAssured.baseURI = "https://api.github.com";
+		String bearerToken = "*************";
+
+		System.out.println("Starting Create Repo Test Case");
+
+		given().header("Content-Type","application/json")
+		.header("Authorization", " Bearer " +bearerToken)
+		//passing the body not the params - that the difference          <==========================Observe
+		.body("{\r\n"
+				+ "    \"name\":\"APILearning2\",\r\n"
+				+ "    \"description\":\"FirstAPILearning2\"\r\n"
+				+ "}").
+		when()
+		.post("/user/repos").
+
+		then().assertThat().statusCode(201).and().
+		contentType(ContentType.JSON).and().
+		body("name", equalTo("APILearning2")).and().
+		body("description", equalTo("FirstAPILearning2"));
+
+		System.out.println("Completed Create Repo Test Case");
+	}
+}
 
 
 
