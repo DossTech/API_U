@@ -1016,7 +1016,7 @@ public class IterationJasonArray {
 }
 
 ================================================================================================================
-Lesson:115
+Lesson:115-116
 -----------Serialization and Deserialization
 
 
@@ -1109,6 +1109,91 @@ public class Seerialization {
 	}
 }
 
+
+============================================================================================================
+
+Lesson:117
+------------POJO Class for JSON Array payload
+
+package basic.rest.serialdeserial;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.testng.annotations.Test;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class JjsonAarraySerialization {
+
+	public String completeJson;
+
+	@Test
+	public void createJasonArrayFromPojo() throws JsonProcessingException {
+
+		List<SamplePOJO1> l1 = new ArrayList<SamplePOJO1>();
+
+		SamplePOJO1 employee1 = new SamplePOJO1();
+		employee1.setFirstName("FirstName1");
+		employee1.setLastName("LastName1");
+		employee1.setCompany("Company1");
+		employee1.setAge(1);
+		employee1.setSalary(100000);
+		employee1.setMarriage(false);
+
+		SamplePOJO1 employee2 = new SamplePOJO1();
+		employee2.setFirstName("FirstName2");
+		employee2.setLastName("LastName2");
+		employee2.setCompany("Company2");
+		employee2.setAge(2);
+		employee2.setSalary(200000);
+		employee2.setMarriage(true);
+
+		SamplePOJO1 employee3 = new SamplePOJO1();
+		employee3.setFirstName("FirstName3");
+		employee3.setLastName("LastName3");
+		employee3.setCompany("Company3");
+		employee3.setAge(3);
+		employee3.setSalary(300000);
+		employee3.setMarriage(true);
+
+		//inserting the Java objects(employe1,2,3) inside the List l1
+		l1.add(employee1);
+		l1.add(employee2);
+		l1.add(employee3);
+
+		//converting Java objects into JASONpayload
+		ObjectMapper objectMapper = new ObjectMapper();
+		completeJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(l1);
+		System.out.println(completeJson);
+	}
+
+	@Test
+	public void creatingPojoObjectFromJson() throws JsonMappingException, JsonProcessingException {
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<SamplePOJO1> allemployees = objectMapper.readValue(completeJson, new TypeReference<List<SamplePOJO1>>() {});
+
+		for (SamplePOJO1 employee : allemployees) {
+			System.out.println("<====================================>");	
+			System.out.println("Employee Firstname: "+employee.getFirstName());
+			System.out.println("Employee Lastname: "+employee.getLastName());
+			System.out.println("Employee Company: "+employee.getCompany());
+			System.out.println("Employee Age: "+employee.getAge());
+			System.out.println("Employee Salary: "+employee.getSalary());
+			System.out.println("Employee MarriageStatus: "+employee.isMarriage());
+
+			System.out.println("<====================================>");	
+		}
+	}
+}
+=================================================================================================================
+
+Lesson:118
+-----------PojoClassOfNestedJSONPAYLOAD
 
 
 
