@@ -769,6 +769,61 @@ public class CreateGithubRepo {
 	}
 }
 
+=============================================================================
+
+Lesson:109/180 *****************************************************************IMPORTANTIMPORTANTIMPORTANTIMPORTANT
+===========Extract response and validation
+
+package basic.rest.postcall;
+//Extracting Github REsponse and validating it
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+
+import org.testng.annotations.Test;
+public class ExtractGithubResponse {
+
+
+	@Test
+	public void validatingGithubResponse() {
+
+RestAssured.baseURI = "https://api.github.com";
+String bearerToken = "**********";
+String requestbody =  "{\r\n"
+		+ "    \"name\":\"APILearning3\",\r\n"
+		+ "    \"description\":\"FirstAPILearning3\"\r\n"
+		+ "}";
+
+
+Response response = given().
+             header("Content-Type", "application/json")
+            .header("Authorization", "Bearer " +bearerToken)
+            .body(requestbody).
+            
+ when().post("/user/repos").
+ 
+ then().assertThat().statusCode(201).and().
+            contentType(ContentType.JSON).
+             extract().response();
+
+String jsonResponse = response.asString();
+
+JsonPath responseBody = new JsonPath(jsonResponse);
+
+System.out.println("Name: "+ responseBody.get("name"));
+System.out.println("Node Id: "+ responseBody.get("node_id"));
+System.out.println("Id: "+ responseBody.get("id"));
+	}
+	
+	
+}
+==================================================================================================
+
+lESSON
 
 
 
