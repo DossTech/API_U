@@ -1343,6 +1343,63 @@ Jenkins-CI
 Log4j - Logging
 Reporting - Extent and Surefire
 
+-----------------------------------------------------------------------------------------------------
+
+Section:24
+Lesson:120
+-----------Project Code Location
+https://github.com/anshulc55/RestAssured_Automation
+
+---------------------------------------------------------------------
+Lesson:121
+---------- Loggin introduction
+
+LOG4j:
+------
+	fast,flexible and reliable logging framework written in java
+
+Why Log4j?
+----------
+
+       Opensource - written in java
+ 	store flow details in database or file
+
+PrincipleComponents
+--------------------
+	Loggers
+	Appender
+	Layout
+
+Loggers:
+---------responsibelfor loggin info
+All - log each and every thing
+DEBUG
+INFO
+WARN
+ERROR
+FATAL
+OFF
+
+Appenders
+---------- deliver the info to destination
+Console
+File
+Rolling
+
+Layout
+------------formatting log info
+
+--------------------------------------------------------------
+Lesson:122
+-----------
+121 to 124 - log4j informations and configurations
+
+
+----------------------------------------------------------------
+Section:25
+------------
+Lesson:125
+-----------
 
 
 
