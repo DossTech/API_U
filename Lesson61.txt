@@ -901,7 +901,12 @@ public class EndToEndCallReq {
 	}
 }
 
+================================================================================
 
+Lesson:111 
+-----------Exploring Native loggin
+
+got to github restapi wiki->we can see the log generation codes there......
 
 
 
