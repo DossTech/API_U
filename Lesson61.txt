@@ -910,6 +910,114 @@ got to github restapi wiki->we can see the log generation codes there......
 
 ================================================================================
 
+Lesson:112
+-----------understanding the complex json
+
+Json Array: nested json
+
+Lesson:113
+----------Handling Json Array
+
+package basic.rest.jsonresvalidation;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import org.testng.annotations.Test;
+
+public class JjsonAarrayHandling {
+
+	@Test
+	public void verifyResponseBody() {
+		
+		RestAssured.baseURI = "https://api.trello.com";
+		
+		Response response = given().
+			param("key","***").
+			param("token","***").
+
+		when().
+			get("/1/boards/cifNpKPv").
+		
+		then().assertThat().statusCode(200).and().
+	     	contentType(ContentType.JSON).and().
+	        extract().response();
+		
+		String jsonResponse = response.asString();
+	    JsonPath responseBody = new JsonPath(jsonResponse);
+	    
+	    System.out.println("Name: " + responseBody.get("name"));
+	    System.out.println("Background: " + responseBody.get("prefs.background"));
+	    System.out.println("Background: " + responseBody.get("prefs.backgroundImageScaled[4].width"));
+	}
+}
+
+==========================================================================================================
+
+Lesson:114 : 
+------------Iterating Json Array over the response
+
+package basic.rest.jsonresvalidation;
+
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import org.testng.annotations.Test;
+import org.testng.annotations.Test;
+
+public class IterationJasonArray {
+
+	
+	@Test
+	public void itteratingJjsonElements() {
+		
+
+		RestAssured.baseURI = "https://api.trello.com";
+		
+		Response response = given().
+			param("key","**").
+			param("token","**").
+
+		when().
+			get("/1/boards/cifNpKPv").
+		
+		then().assertThat().statusCode(200).and().
+	     	contentType(ContentType.JSON).and().
+	        extract().response();
+		
+		String jsonResponse = response.asString();
+	    JsonPath responseBody = new JsonPath(jsonResponse);
+	    
+	//    System.out.println("Name: " + responseBody.get("name"));
+	//    System.out.println("Background: " + responseBody.get("prefs.background"));
+	//    System.out.println("Background: " + responseBody.get("prefs.backgroundImageScaled[4].width"));
+	    
+	  int bgsize = responseBody.getInt("prefs.backgroundImageScaled.size()");
+	  
+	  for (int i = 0; i <bgsize; i++) {
+		
+	int width = responseBody.getInt("prefs.backgroundImageScaled["+i+"].width");
+	int height = responseBody.getInt("prefs.backgroundImageScaled["+i+"].height");
+	
+	System.out.println("BackgroundImageScaled array no "+ i + " Width: "+ width + " height: "+ height);
+		  
+	}
+
+	}
+}
+
+
+
+
 
 
 
