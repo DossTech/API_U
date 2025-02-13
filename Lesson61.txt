@@ -1195,6 +1195,154 @@ public class JjsonAarraySerialization {
 Lesson:118
 -----------PojoClassOfNestedJSONPAYLOAD
 
+package basic.rest.nestedjsonpayload;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.testng.annotations.Test;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class CreateNestedJsonFromPOJO {
+
+	//Creation of object for CompanyDetailsPOJO Class
+
+	@Test
+	public void generatePojoData() throws JsonProcessingException {
+		CompanyDetails nestedPojo = new CompanyDetails();
+		nestedPojo.setCompanyName("DossTech");
+		nestedPojo.setCompanyHOCity("Chennai");
+		nestedPojo.setCompanyCEO("Doss");
+
+
+		List<String> supportedSalaryBanks = new ArrayList<String>();
+		supportedSalaryBanks.add("HDFC");
+		supportedSalaryBanks.add("ICICI");
+		supportedSalaryBanks.add("AXIS");
+		nestedPojo.setSupportedSalaryBanks(supportedSalaryBanks);
+
+		//From PFDetails Class
+		List<Integer> pinCodesOfCityOffice = new ArrayList<Integer>();
+		pinCodesOfCityOffice.add(600001);
+		pinCodesOfCityOffice.add(600002);
+		pinCodesOfCityOffice.add(600003);
+		nestedPojo.setPinCodesOfCityOffice(pinCodesOfCityOffice);
+
+
+		//From Employee POJO Class
+		Employees employees1 = new Employees();
+		employees1.setFirstName("FirstName1");
+		employees1.setLastName("LastName1");
+		employees1.setGender("Male");
+		employees1.setAge(35);
+		employees1.setSalary(100000);
+		employees1.setMarried(false);
+
+
+		Employees employees2 = new Employees();
+		employees2.setFirstName("FirstName2");
+		employees2.setLastName("LastName2");
+		employees2.setGender("Male");
+		employees2.setAge(35);
+		employees2.setSalary(200000);
+		employees2.setMarried(false);
+
+		Employees employees3 = new Employees();
+		employees3.setFirstName("FirstName3");
+		employees3.setLastName("LastName3");
+		employees3.setGender("Male");
+		employees3.setAge(35);
+		employees3.setSalary(300000);
+		employees3.setMarried(false);
+
+		List<Employees> employee = new ArrayList<Employees>();
+		employee.add(employees1);
+		employee.add(employees2);
+		employee.add(employees3);
+		nestedPojo.setEmployee(employee);
+
+		//From Contractors POJO Class
+		Contractors contractor1 = new Contractors();
+		contractor1.setFirstName("Qeagle");
+		contractor1.setLastName("TestLeaf");
+		contractor1.setContractFrom("2023");
+		contractor1.setContractTo("2024");
+
+		Contractors contractor2 = new Contractors();
+		contractor2.setFirstName("MSC");
+		contractor2.setLastName("Shipping");
+		contractor2.setContractFrom("2024");
+		contractor2.setContractTo("2025");
+
+		List<Contractors> contractors = new ArrayList<Contractors>();
+		contractors.add(contractor1);
+		contractors.add(contractor2);
+		nestedPojo.setContractors(contractors);
+
+		//From PFDetailsPOJOClass		
+		/*
+		  private String pfName;
+	private String pfCity;
+	private int pfYear;
+	private int noOfEmployees;
+		 */
+
+		PFDetails pf1 = new PFDetails();
+		pf1.setPfName("Emp1");
+		pf1.setPfCity("Chennai");
+		pf1.setPfYear(2025);	
+		pf1.setNoOfEmployees(18);
+		nestedPojo.setCompanyPFDetails(pf1);
+
+		//
+		ObjectMapper objectMapper = new ObjectMapper();
+		String nestedPayLoad = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(nestedPojo);
+		System.out.println(nestedPayLoad);
+	}
+
+}
+==================================================================================================================
+
+Lesson:119
+-----------RoadMap for Framework Design pattern
+
+
+Automation Framework: 
+---------------------
+      Its not a single tool or process
+      Its a collection of tools and processes working together to support 
+               automated testing of any application
+      It intergate various functions like libraries, testdatas, varioous reusable modules
+
+Why we need Automation Framework?
+----------------------------------
+1.Maintain a well defined strategy across the test suties
+2.Enhanced speed at which testing progress
+3.Maintain the test code will be easy
+4.The URL or Application can be tested accurately
+5.Continuous testing of coding and delivery will be achieved
+
+Types of Automation Framework
+--------------------------------
+1.Linear Automation Framework
+2.Modular Drivern Framework
+3.Behaviour Drivern Framework
+4.DataDriven Framework
+5.Keyword Driven Framework
+6.hybrid Testing Framework
+
+Framework Components
+--------------------
+1.CoreJAva
+TestNG - Execution of TEsts
+Rest Assured - Rest API
+Build Tools - For builds Preparation
+Jenkins-CI
+Log4j - Logging
+Reporting - Extent and Surefire
+
 
 
 
