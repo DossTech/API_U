@@ -823,7 +823,86 @@ System.out.println("Id: "+ responseBody.get("id"));
 }
 ==================================================================================================
 
-lESSON
+Lesson:110
+===========End to End Case Automation
+
+package basic.rest.postcall;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import org.testng.annotations.Test;
+
+public class EndToEndCallReq {
+
+	public String baseuri = "https://api.github.com";
+	public String bearerToken = "*****************";
+		public String repoName;
+
+
+	@Test
+	public void creatingRepo() {
+
+		RestAssured.baseURI = baseuri;
+		String requestBody = "{\r\n"
+				+ "    \"name\":\"APILearning5\",\r\n"
+				+ "    \"description\":\"FirstAPILearning5\"\r\n"
+				+ "}";
+
+
+		Response response = given()
+				.header("Content-Type","application/json")
+				.header("Authorization", "bearer "+ bearerToken)
+				.body(requestBody).
+
+		when()
+		        .post("/user/repos").
+
+		then().assertThat()
+				.statusCode(201).and()
+				.contentType(ContentType.JSON)
+				.extract().response();
+
+		String jsonResponse = response.asString();
+
+		JsonPath responseBody = new JsonPath(jsonResponse);
+	
+		System.out.println("Id: "+ responseBody.get("id"));
+		System.out.println("Name : "+ responseBody.get("name"));
+		System.out.println("Node Id: "+ responseBody.get("node_id"));
+		System.out.println("Full Name: "+ responseBody.get("full_name"));
+
+		
+
+		repoName = responseBody.get("full_name");
+	//	System.out.println("The Creation of Repo: "+repoName);
+	}
+
+
+	@Test
+	public void deletingRepo() {
+
+		RestAssured.baseURI = baseuri;
+		
+		given().
+		header("Content-Type","application/json").
+		header("Authorization", "Bearer "+ bearerToken).
+		
+		when().
+		delete("/repos/"+repoName).  //repos/{owner}/{repo}
+		
+		then().assertThat().statusCode(204);
+		
+		System.out.println("The Deletion of Repo: "+repoName);
+	}
+}
+
+
+
 
 
 
