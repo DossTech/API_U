@@ -1015,6 +1015,104 @@ public class IterationJasonArray {
 	}
 }
 
+================================================================================================================
+Lesson:115
+-----------Serialization and Deserialization
+
+
+Serialization: process of converting objects into stream of data
+
+POJO: used for creating JSOM,XML payloads for API
+
+Dependencies:
+            1.Jackson-databinder
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.18.2</version>
+</dependency>
+
+            2.json-simple
+
+<dependency>
+    <groupId>com.googlecode.json-simple</groupId>
+    <artifactId>json-simple</artifactId>
+    <version>1.1.1</version>
+</dependency>
+
+
+Steps
+-----
+Deserialization 
+
+Serialization
+
+package basic.rest.serialdeserial;
+
+import org.testng.annotations.Test;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+//Conversion of JavaObject into JSON payload
+public class Seerialization {
+
+	@Test
+	//Serialization
+	public void createDataFromPojo() throws JsonProcessingException {
+
+		//Creation of object for POJO Class
+		SamplePOJO employee = new SamplePOJO();
+
+		employee.setFirstName("FirstName1");
+		employee.setLastName("LastName1");
+		employee.setCompany("Company1");
+		employee.setAge(1);
+		employee.setSalary(100000);
+		employee.setMarriage(false);
+
+		//converting the Java object into JASON payload as String
+		ObjectMapper objectMapper = new ObjectMapper();
+		//Create an ObjectWriter instance with pretty print formatting: 
+		//Convert the employee object into a JSON string
+		String employeeJSON = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee);  
+		System.out.println(employeeJSON);
+	}
+	
+	@Test
+	//Deserialization
+	public void getPojoFromObject() throws JsonProcessingException {
+		SamplePOJO employee = new SamplePOJO();
+
+		employee.setFirstName("FirstName2");
+		employee.setLastName("LastName2");
+		employee.setCompany("Company2");
+		employee.setAge(2);
+		employee.setSalary(200000);
+		employee.setMarriage(true);
+
+		//converting the Java object into JASON payload as String
+		ObjectMapper objectMapper = new ObjectMapper();
+		//Create an ObjectWriter instance with pretty print formatting: 
+		//Convert the employee object into a JSON string
+		String employeeJSON = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee);  
+		
+		//converting JSON String into Class object
+		SamplePOJO employeeObject = objectMapper.readValue(employeeJSON, SamplePOJO.class);
+		System.out.println("Employee Firstname: "+employeeObject.getFirstName());
+		System.out.println("Employee Lastname: "+employeeObject.getLastName());
+		System.out.println("Employee Company: "+employeeObject.getCompany());
+		System.out.println("Employee Age: "+employeeObject.getAge());
+		System.out.println("Employee Salary: "+employeeObject.getSalary());
+		System.out.println("Employee MarriageStatus: "+employeeObject.isMarriage());
+
+	}
+}
+
+
+
+
+
 
 
 
